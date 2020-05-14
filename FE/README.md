@@ -1,0 +1,1 @@
+This folder will contain the frontend of the app, including the view for the clients

@@ -1,0 +1,14 @@
+FROM python:slim
+ARG MAINPAGE=application.py
+
+ADD $MAINPAGE /app/
+ADD requirements.txt /app/
+
+WORKDIR /app
+RUN pip install -r requirements.txt
+
+ENV FLASK_APP $MAINPAGE
+ENTRYPOINT ['flask']
+CMD ['run']
+
+EXPOSE 5000

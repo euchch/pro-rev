@@ -1,0 +1,52 @@
+version: "3.7"
+services:
+  fe:
+    container_name: pro-rev-fe
+    image:  pro_rev_fe:latest
+    entrypoint: flask
+    ports:
+      - "5001:5000"
+    expose:
+      - '5000'
+    command:
+      - "run" 
+      - "--host" 
+      - "0.0.0.0"
+
+  be:
+    container_name: pro-rev-be
+    image:  pro_rev_be:latest
+    entrypoint: flask
+    ports:
+      - "5000:5000"
+    expose:
+      - '5000'
+    command:
+      - "run" 
+      - "--host" 
+      - "0.0.0.0"
+
+
+  db:
+    container_name: sql
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'db'
+      MYSQL_USER: 'user'
+      MYSQL_PASSWORD: 'password'
+      MYSQL_ROOT_PASSWORD: 'password'
+    ports:
+      - '3306:3306'
+    expose:
+      - '3306'
+    volumes:
+      - my-db:/var/lib/mysql
+volumes:
+  my-db:
+    driver: local
+    # driver_opts:
+    #   o: bind
+    #   type: none
+    #   device: ~/localProjects/pro-rev/Provisioning/Local/db
+
